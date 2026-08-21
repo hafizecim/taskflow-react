@@ -92,25 +92,35 @@ function Tasks() {
 
               <div className="mt-5 flex gap-2">
                 <button
-                  type="button"
-                  onClick={() =>
-                    navigate(`/tasks/${task.id}/edit`)
-                  }
-                  className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
+                    type="button"
+                    onClick={() =>
+                    navigate(`/tasks/${task.id}`)
+                    }
+                    className="rounded-lg border px-4 py-2 text-sm font-medium hover:bg-gray-50"
                 >
-                  Edit
+                    View Details
                 </button>
 
                 <button
-                  type="button"
-                  onClick={() =>
-                    handleDelete(task.id)
-                  }
-                  className="rounded-lg bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700"
+                    type="button"
+                    onClick={() =>
+                    navigate(`/tasks/${task.id}/edit`)
+                    }
+                    className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
                 >
-                  Delete
+                    Edit
                 </button>
-              </div>
+
+                <button
+                    type="button"
+                    onClick={() =>
+                    handleDelete(task.id)
+                    }
+                    className="rounded-lg bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700"
+                >
+                    Delete
+                </button>
+                </div>
             </div>
           ))}
         </div>
