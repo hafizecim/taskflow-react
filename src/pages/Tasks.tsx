@@ -5,6 +5,7 @@ function Tasks() {
     tasks,
     loading,
     error,
+    deleteTask,
   } = useTasks()
 
   if (loading && tasks.length === 0) {
@@ -25,6 +26,16 @@ function Tasks() {
         </p>
       </div>
     )
+  }
+
+  const handleDelete = (id: string) => {
+    const confirmed = window.confirm(
+      'Are you sure you want to delete this task?',
+    )
+
+    if (confirmed) {
+      deleteTask(id)
+    }
   }
 
   return (
@@ -67,6 +78,16 @@ function Tasks() {
                 <strong>Due Date:</strong>{' '}
                 {task.dueDate}
               </p>
+            </div>
+
+            <div className="mt-5 flex gap-2">
+              <button
+                type="button"
+                onClick={() => handleDelete(task.id)}
+                className="rounded-lg bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700"
+              >
+                Delete
+              </button>
             </div>
           </div>
         ))}
