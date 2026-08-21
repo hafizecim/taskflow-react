@@ -1,11 +1,13 @@
-import useFetch from '../hooks/useFetch'
-import type { Task } from '../types/task'
+import { useTasks } from '../context/useTasks'
 
 function Tasks() {
-  const { data, loading, error, refetch } =
-    useFetch<Task[]>('/tasks.json')
+  const {
+    tasks,
+    loading,
+    error,
+  } = useTasks()
 
-  if (loading) {
+  if (loading && tasks.length === 0) {
     return (
       <div className="flex min-h-[400px] items-center justify-center">
         <p className="text-lg text-gray-600">
@@ -15,19 +17,12 @@ function Tasks() {
     )
   }
 
-  if (error) {
+  if (error && tasks.length === 0) {
     return (
       <div className="flex min-h-[400px] flex-col items-center justify-center gap-4">
         <p className="text-red-600">
           Failed to load tasks.
         </p>
-
-        <button
-          onClick={refetch}
-          className="rounded-lg bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
-        >
-          Try Again
-        </button>
       </div>
     )
   }
@@ -39,7 +34,7 @@ function Tasks() {
       </h1>
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {data?.map((task) => (
+        {tasks.map((task) => (
           <div
             key={task.id}
             className="rounded-xl border bg-white p-5 shadow-sm"
@@ -54,19 +49,23 @@ function Tasks() {
 
             <div className="space-y-1 text-sm">
               <p>
-                <strong>Category:</strong> {task.category}
+                <strong>Category:</strong>{' '}
+                {task.category}
               </p>
 
               <p>
-                <strong>Priority:</strong> {task.priority}
+                <strong>Priority:</strong>{' '}
+                {task.priority}
               </p>
 
               <p>
-                <strong>Status:</strong> {task.status}
+                <strong>Status:</strong>{' '}
+                {task.status}
               </p>
 
               <p>
-                <strong>Due Date:</strong> {task.dueDate}
+                <strong>Due Date:</strong>{' '}
+                {task.dueDate}
               </p>
             </div>
           </div>
