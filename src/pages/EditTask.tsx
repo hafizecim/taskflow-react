@@ -58,7 +58,8 @@ function EditTask() {
           </h1>
 
           <p className="mb-4 text-red-600">
-            The task you are trying to edit does not exist.
+            The task you are trying to edit does not
+            exist.
           </p>
 
           <button
@@ -81,7 +82,9 @@ function EditTask() {
     const validationErrors: string[] = []
 
     if (!title.trim()) {
-      validationErrors.push('Title is required.')
+      validationErrors.push(
+        'Title is required.',
+      )
     }
 
     if (!description.trim()) {
@@ -91,19 +94,27 @@ function EditTask() {
     }
 
     if (!category.trim()) {
-      validationErrors.push('Category is required.')
+      validationErrors.push(
+        'Category is required.',
+      )
     }
 
     if (!priority) {
-      validationErrors.push('Priority is required.')
+      validationErrors.push(
+        'Priority is required.',
+      )
     }
 
     if (!status) {
-      validationErrors.push('Status is required.')
+      validationErrors.push(
+        'Status is required.',
+      )
     }
 
     if (!dueDate) {
-      validationErrors.push('Due date is required.')
+      validationErrors.push(
+        'Due date is required.',
+      )
     }
 
     if (validationErrors.length > 0) {
@@ -130,9 +141,15 @@ function EditTask() {
 
   return (
     <div className="mx-auto max-w-2xl p-6">
-      <h1 className="mb-6 text-3xl font-bold">
-        Edit Task
-      </h1>
+      <div className="mb-6">
+        <h1 className="text-3xl font-bold">
+          Edit Task
+        </h1>
+
+        <p className="mt-2 text-gray-600">
+          Update the information of your task.
+        </p>
+      </div>
 
       {errors.length > 0 && (
         <div className="mb-6 rounded-lg border border-red-300 bg-red-50 p-4">
@@ -194,10 +211,21 @@ function EditTask() {
             }
             className="w-full rounded-lg border px-4 py-2"
           >
-            <option value="">Select category</option>
-            <option value="Work">Work</option>
-            <option value="Personal">Personal</option>
-            <option value="Study">Study</option>
+            <option value="">
+              Select category
+            </option>
+
+            <option value="Work">
+              Work
+            </option>
+
+            <option value="Personal">
+              Personal
+            </option>
+
+            <option value="Study">
+              Study
+            </option>
           </select>
         </div>
 
@@ -210,15 +238,28 @@ function EditTask() {
             value={priority}
             onChange={(event) =>
               setPriority(
-                event.target.value as TaskPriority,
+                event.target.value as
+                  | TaskPriority
+                  | '',
               )
             }
             className="w-full rounded-lg border px-4 py-2"
           >
-            <option value="">Select priority</option>
-            <option value="Low">Low</option>
-            <option value="Medium">Medium</option>
-            <option value="High">High</option>
+            <option value="">
+              Select priority
+            </option>
+
+            <option value="Low">
+              Low
+            </option>
+
+            <option value="Medium">
+              Medium
+            </option>
+
+            <option value="High">
+              High
+            </option>
           </select>
         </div>
 
@@ -231,16 +272,25 @@ function EditTask() {
             value={status}
             onChange={(event) =>
               setStatus(
-                event.target.value as TaskStatus,
+                event.target.value as
+                  | TaskStatus
+                  | '',
               )
             }
             className="w-full rounded-lg border px-4 py-2"
           >
-            <option value="">Select status</option>
-            <option value="Todo">Todo</option>
+            <option value="">
+              Select status
+            </option>
+
+            <option value="Todo">
+              Todo
+            </option>
+
             <option value="In Progress">
               In Progress
             </option>
+
             <option value="Completed">
               Completed
             </option>
@@ -272,7 +322,9 @@ function EditTask() {
 
           <button
             type="button"
-            onClick={() => navigate('/tasks')}
+            onClick={() =>
+              navigate('/tasks')
+            }
             className="rounded-lg border px-5 py-2 font-medium hover:bg-gray-50"
           >
             Cancel

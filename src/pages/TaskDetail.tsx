@@ -36,6 +36,20 @@ function TaskDetail() {
     )
   }
 
+  const priorityClass =
+    task.priority === 'High'
+      ? 'bg-red-100 text-red-700'
+      : task.priority === 'Medium'
+        ? 'bg-yellow-100 text-yellow-700'
+        : 'bg-green-100 text-green-700'
+
+  const statusClass =
+    task.status === 'Completed'
+      ? 'bg-green-100 text-green-700'
+      : task.status === 'In Progress'
+        ? 'bg-blue-100 text-blue-700'
+        : 'bg-gray-100 text-gray-700'
+
   return (
     <div className="mx-auto max-w-3xl p-6">
       <div className="mb-6 flex items-center justify-between">
@@ -53,68 +67,94 @@ function TaskDetail() {
       </div>
 
       <div className="rounded-xl border bg-white p-6 shadow-sm">
-        <h2 className="mb-4 text-2xl font-semibold">
-          {task.title}
-        </h2>
+        <div className="mb-6">
+          <h2 className="mb-2 text-2xl font-semibold">
+            {task.title}
+          </h2>
 
-        <div className="space-y-5">
+          <p className="text-gray-500">
+            Task information and details
+          </p>
+        </div>
+
+        <div className="mb-6 flex flex-wrap gap-3">
+          <span
+            className={`rounded-full px-3 py-1 text-sm font-medium ${statusClass}`}
+          >
+            {task.status}
+          </span>
+
+          <span
+            className={`rounded-full px-3 py-1 text-sm font-medium ${priorityClass}`}
+          >
+            {task.priority} Priority
+          </span>
+
+          <span className="rounded-full bg-purple-100 px-3 py-1 text-sm font-medium text-purple-700">
+            {task.category}
+          </span>
+        </div>
+
+        <div className="space-y-6">
           <div>
-            <h3 className="mb-1 font-semibold">
+            <h3 className="mb-2 text-lg font-semibold">
               Description
             </h3>
 
-            <p className="text-gray-600">
-              {task.description}
-            </p>
+            <div className="rounded-lg bg-gray-50 p-4">
+              <p className="leading-7 text-gray-600">
+                {task.description}
+              </p>
+            </div>
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2">
-            <div>
-              <h3 className="font-semibold">
+            <div className="rounded-lg border p-4">
+              <p className="text-sm text-gray-500">
                 Category
-              </h3>
+              </p>
 
-              <p className="text-gray-600">
+              <p className="mt-1 font-semibold">
                 {task.category}
               </p>
             </div>
 
-            <div>
-              <h3 className="font-semibold">
+            <div className="rounded-lg border p-4">
+              <p className="text-sm text-gray-500">
                 Priority
-              </h3>
+              </p>
 
-              <p className="text-gray-600">
+              <p className="mt-1 font-semibold">
                 {task.priority}
               </p>
             </div>
 
-            <div>
-              <h3 className="font-semibold">
+            <div className="rounded-lg border p-4">
+              <p className="text-sm text-gray-500">
                 Status
-              </h3>
+              </p>
 
-              <p className="text-gray-600">
+              <p className="mt-1 font-semibold">
                 {task.status}
               </p>
             </div>
 
-            <div>
-              <h3 className="font-semibold">
+            <div className="rounded-lg border p-4">
+              <p className="text-sm text-gray-500">
                 Due Date
-              </h3>
+              </p>
 
-              <p className="text-gray-600">
+              <p className="mt-1 font-semibold">
                 {task.dueDate}
               </p>
             </div>
 
-            <div>
-              <h3 className="font-semibold">
+            <div className="rounded-lg border p-4 sm:col-span-2">
+              <p className="text-sm text-gray-500">
                 Created At
-              </h3>
+              </p>
 
-              <p className="text-gray-600">
+              <p className="mt-1 font-semibold">
                 {new Date(
                   task.createdAt,
                 ).toLocaleString()}
@@ -123,7 +163,7 @@ function TaskDetail() {
           </div>
         </div>
 
-        <div className="mt-8 flex gap-3">
+        <div className="mt-8 flex flex-wrap gap-3 border-t pt-6">
           <button
             type="button"
             onClick={() =>
