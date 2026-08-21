@@ -26,42 +26,12 @@ function Tasks() {
   const [priorityFilter, setPriorityFilter] =
     useState<TaskPriority | ''>('')
 
-  if (loading && tasks.length === 0) {
-    return (
-      <div className="flex min-h-[400px] items-center justify-center">
-        <p className="text-lg text-gray-600">
-          Loading tasks...
-        </p>
-      </div>
-    )
-  }
-
-  if (error && tasks.length === 0) {
-    return (
-      <div className="flex min-h-[400px] flex-col items-center justify-center gap-4">
-        <p className="text-red-600">
-          Failed to load tasks.
-        </p>
-      </div>
-    )
-  }
-
-  const handleDelete = (id: string) => {
-    const confirmed = window.confirm(
-      'Are you sure you want to delete this task?',
-    )
-
-    if (confirmed) {
-      deleteTask(id)
-    }
-  }
-
   const filteredTasks = useMemo(() => {
-    return tasks.filter((task) => {
-      const search = searchTerm
-        .trim()
-        .toLowerCase()
+    const search = searchTerm
+      .trim()
+      .toLowerCase()
 
+    return tasks.filter((task) => {
       const matchesSearch =
         task.title.toLowerCase().includes(search) ||
         task.description
@@ -89,10 +59,40 @@ function Tasks() {
     priorityFilter,
   ])
 
+  const handleDelete = (id: string) => {
+    const confirmed = window.confirm(
+      'Are you sure you want to delete this task?',
+    )
+
+    if (confirmed) {
+      deleteTask(id)
+    }
+  }
+
   const handleClearFilters = () => {
     setSearchTerm('')
     setStatusFilter('')
     setPriorityFilter('')
+  }
+
+  if (loading && tasks.length === 0) {
+    return (
+      <div className="flex min-h-[400px] items-center justify-center">
+        <p className="text-lg text-gray-600">
+          Loading tasks...
+        </p>
+      </div>
+    )
+  }
+
+  if (error && tasks.length === 0) {
+    return (
+      <div className="flex min-h-[400px] flex-col items-center justify-center gap-4">
+        <p className="text-red-600">
+          Failed to load tasks.
+        </p>
+      </div>
+    )
   }
 
   return (
