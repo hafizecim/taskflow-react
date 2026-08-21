@@ -1,0 +1,62 @@
+[
+  {
+    "id": "1",
+    "title": "Complete React project",
+    "description": "Finish the TaskFlow final project.",
+    "category": "Education",
+    "priority": "High",
+    "status": "In Progress",
+    "dueDate": "2026-08-25",
+    "createdAt": "2026-08-21"
+  },
+  {
+    "id": "2",
+    "title": "Study TypeScript",
+    "description": "Review TypeScript interfaces and types.",
+    "category": "Education",
+    "priority": "Medium",
+    "status": "Todo",
+    "dueDate": "2026-08-26",
+    "createdAt": "2026-08-21"
+  },
+  {
+    "id": "3",
+    "title": "Prepare presentation",
+    "description": "Prepare the TaskFlow project presentation.",
+    "category": "Work",
+    "priority": "High",
+    "status": "Todo",
+    "dueDate": "2026-08-29",
+    "createdAt": "2026-08-21"
+  },
+  {
+    "id": "4",
+    "title": "Review project structure",
+    "description": "Review components and folder organization.",
+    "category": "Development",
+    "priority": "Low",
+    "status": "Completed",
+    "dueDate": "2026-08-22",
+    "createdAt": "2026-08-21"
+  },
+  {
+    "id": "5",
+    "title": "Create responsive layout",
+    "description": "Make the application responsive for mobile devices.",
+    "category": "Development",
+    "priority": "Medium",
+    "status": "In Progress",
+    "dueDate": "2026-08-27",
+    "createdAt": "2026-08-21"
+  },
+  {
+    "id": "6",
+    "title": "Test application",
+    "description": "Test routing, forms and task management features.",
+    "category": "Testing",
+    "priority": "Medium",
+    "status": "Todo",
+    "dueDate": "2026-08-30",
+    "createdAt": "2026-08-21"
+  }
+]
