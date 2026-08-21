@@ -7,6 +7,7 @@ import EditTask from './pages/EditTask'
 import AddTask from './pages/AddTask'
 import { TaskProvider } from './context/TaskProvider'
 
+
 function App() {
   return (
     <BrowserRouter>

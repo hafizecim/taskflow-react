@@ -1,7 +1,9 @@
 import { useState } from 'react'
 import type { SyntheticEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
+
 import { useTasks } from '../context/useTasks'
+
 import type {
   Task,
   TaskPriority,
@@ -15,8 +17,10 @@ function AddTask() {
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [category, setCategory] = useState('')
-  const [priority, setPriority] = useState<TaskPriority | ''>('')
-  const [status, setStatus] = useState<TaskStatus | ''>('')
+  const [priority, setPriority] =
+    useState<TaskPriority | ''>('')
+  const [status, setStatus] =
+    useState<TaskStatus | ''>('')
   const [dueDate, setDueDate] = useState('')
 
   const [errors, setErrors] = useState<string[]>([])
@@ -33,7 +37,9 @@ function AddTask() {
     }
 
     if (!description.trim()) {
-      validationErrors.push('Description is required.')
+      validationErrors.push(
+        'Description is required.',
+      )
     }
 
     if (!category.trim()) {
@@ -58,7 +64,7 @@ function AddTask() {
     }
 
     if (!priority || !status) {
-    return
+      return
     }
 
     const newTask: Task = {
@@ -78,158 +84,240 @@ function AddTask() {
   }
 
   return (
-    <div className="mx-auto max-w-2xl p-6">
-      <h1 className="mb-6 text-3xl font-bold">
-        Add New Task
-      </h1>
+    <div className="min-h-full bg-slate-50 p-6">
+      <div className="mx-auto max-w-3xl">
+        {/* Header */}
 
-      {errors.length > 0 && (
-        <div className="mb-6 rounded-lg border border-red-300 bg-red-50 p-4">
-          <p className="mb-2 font-semibold text-red-700">
-            Please fix the following errors:
+        <div className="mb-8">
+          <p className="mb-1 text-sm font-semibold uppercase tracking-wide text-indigo-600">
+            Task Management
           </p>
 
-          <ul className="list-disc pl-5 text-red-600">
-            {errors.map((error) => (
-              <li key={error}>{error}</li>
-            ))}
-          </ul>
-        </div>
-      )}
+          <h1 className="text-3xl font-bold tracking-tight text-slate-900">
+            Add New Task
+          </h1>
 
-      <form
-        onSubmit={handleSubmit}
-        className="space-y-5 rounded-xl border bg-white p-6 shadow-sm"
-      >
-        <div>
-          <label className="mb-2 block font-medium">
-            Title
-          </label>
-
-          <input
-            type="text"
-            value={title}
-            onChange={(event) =>
-              setTitle(event.target.value)
-            }
-            className="w-full rounded-lg border px-4 py-2 outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="Enter task title"
-          />
+          <p className="mt-2 text-slate-500">
+            Create a new task and keep your work organized.
+          </p>
         </div>
 
-        <div>
-          <label className="mb-2 block font-medium">
-            Description
-          </label>
+        {/* Validation Errors */}
 
-          <textarea
-            value={description}
-            onChange={(event) =>
-              setDescription(event.target.value)
-            }
-            rows={4}
-            className="w-full rounded-lg border px-4 py-2 outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="Enter task description"
-          />
-        </div>
+        {errors.length > 0 && (
+          <div className="mb-6 rounded-2xl border border-red-200 bg-red-50 p-5">
+            <div className="flex gap-3">
+              <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-red-100 font-bold text-red-600">
+                !
+              </div>
 
-        <div>
-          <label className="mb-2 block font-medium">
-            Category
-          </label>
+              <div>
+                <p className="font-semibold text-red-800">
+                  Please fix the following errors:
+                </p>
 
-          <select
-            value={category}
-            onChange={(event) =>
-              setCategory(event.target.value)
-            }
-            className="w-full rounded-lg border px-4 py-2"
-          >
-            <option value="">Select category</option>
-            <option value="Work">Work</option>
-            <option value="Personal">Personal</option>
-            <option value="Study">Study</option>
-          </select>
-        </div>
+                <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-red-700">
+                  {errors.map((error) => (
+                    <li key={error}>{error}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        )}
 
-        <div>
-          <label className="mb-2 block font-medium">
-            Priority
-          </label>
+        {/* Form */}
 
-          <select
-            value={priority}
-            onChange={(event) =>
-              setPriority(
-                event.target.value as TaskPriority,
-              )
-            }
-            className="w-full rounded-lg border px-4 py-2"
-          >
-            <option value="">Select priority</option>
-            <option value="Low">Low</option>
-            <option value="Medium">Medium</option>
-            <option value="High">High</option>
-          </select>
-        </div>
+        <form
+          onSubmit={handleSubmit}
+          className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8"
+        >
+          <div className="space-y-6">
+            {/* Title */}
 
-        <div>
-          <label className="mb-2 block font-medium">
-            Status
-          </label>
+            <div>
+              <label
+                htmlFor="title"
+                className="mb-2 block text-sm font-semibold text-slate-700"
+              >
+                Title
+              </label>
 
-          <select
-            value={status}
-            onChange={(event) =>
-              setStatus(
-                event.target.value as TaskStatus,
-              )
-            }
-            className="w-full rounded-lg border px-4 py-2"
-          >
-            <option value="">Select status</option>
-            <option value="Todo">Todo</option>
-            <option value="In Progress">
-              In Progress
-            </option>
-            <option value="Completed">
-              Completed
-            </option>
-          </select>
-        </div>
+              <input
+                id="title"
+                type="text"
+                value={title}
+                onChange={(event) =>
+                  setTitle(event.target.value)
+                }
+                className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100"
+                placeholder="Enter task title"
+              />
+            </div>
 
-        <div>
-          <label className="mb-2 block font-medium">
-            Due Date
-          </label>
+            {/* Description */}
 
-          <input
-            type="date"
-            value={dueDate}
-            onChange={(event) =>
-              setDueDate(event.target.value)
-            }
-            className="w-full rounded-lg border px-4 py-2"
-          />
-        </div>
+            <div>
+              <label
+                htmlFor="description"
+                className="mb-2 block text-sm font-semibold text-slate-700"
+              >
+                Description
+              </label>
 
-        <div className="flex gap-3">
-          <button
-            type="submit"
-            className="rounded-lg bg-blue-600 px-5 py-2 font-medium text-white hover:bg-blue-700"
-          >
-            Add Task
-          </button>
+              <textarea
+                id="description"
+                value={description}
+                onChange={(event) =>
+                  setDescription(event.target.value)
+                }
+                rows={5}
+                className="w-full resize-none rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100"
+                placeholder="Describe your task..."
+              />
+            </div>
 
-          <button
-            type="button"
-            onClick={() => navigate('/tasks')}
-            className="rounded-lg border px-5 py-2 font-medium hover:bg-gray-50"
-          >
-            Cancel
-          </button>
-        </div>
-      </form>
+            {/* Category + Priority */}
+
+            <div className="grid gap-6 sm:grid-cols-2">
+              <div>
+                <label
+                  htmlFor="category"
+                  className="mb-2 block text-sm font-semibold text-slate-700"
+                >
+                  Category
+                </label>
+
+                <select
+                  id="category"
+                  value={category}
+                  onChange={(event) =>
+                    setCategory(event.target.value)
+                  }
+                  className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-700 outline-none transition focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100"
+                >
+                  <option value="">
+                    Select category
+                  </option>
+
+                  <option value="Work">Work</option>
+                  <option value="Personal">
+                    Personal
+                  </option>
+                  <option value="Study">Study</option>
+                </select>
+              </div>
+
+              <div>
+                <label
+                  htmlFor="priority"
+                  className="mb-2 block text-sm font-semibold text-slate-700"
+                >
+                  Priority
+                </label>
+
+                <select
+                  id="priority"
+                  value={priority}
+                  onChange={(event) =>
+                    setPriority(
+                      event.target
+                        .value as TaskPriority,
+                    )
+                  }
+                  className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-700 outline-none transition focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100"
+                >
+                  <option value="">
+                    Select priority
+                  </option>
+
+                  <option value="Low">Low</option>
+                  <option value="Medium">
+                    Medium
+                  </option>
+                  <option value="High">High</option>
+                </select>
+              </div>
+            </div>
+
+            {/* Status + Due Date */}
+
+            <div className="grid gap-6 sm:grid-cols-2">
+              <div>
+                <label
+                  htmlFor="status"
+                  className="mb-2 block text-sm font-semibold text-slate-700"
+                >
+                  Status
+                </label>
+
+                <select
+                  id="status"
+                  value={status}
+                  onChange={(event) =>
+                    setStatus(
+                      event.target.value as TaskStatus,
+                    )
+                  }
+                  className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-700 outline-none transition focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100"
+                >
+                  <option value="">
+                    Select status
+                  </option>
+
+                  <option value="Todo">Todo</option>
+
+                  <option value="In Progress">
+                    In Progress
+                  </option>
+
+                  <option value="Completed">
+                    Completed
+                  </option>
+                </select>
+              </div>
+
+              <div>
+                <label
+                  htmlFor="dueDate"
+                  className="mb-2 block text-sm font-semibold text-slate-700"
+                >
+                  Due Date
+                </label>
+
+                <input
+                  id="dueDate"
+                  type="date"
+                  value={dueDate}
+                  onChange={(event) =>
+                    setDueDate(event.target.value)
+                  }
+                  className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-700 outline-none transition focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Actions */}
+
+          <div className="mt-8 flex flex-col-reverse gap-3 border-t border-slate-100 pt-6 sm:flex-row sm:justify-end">
+            <button
+              type="button"
+              onClick={() => navigate('/tasks')}
+              className="rounded-xl border border-slate-300 px-5 py-3 font-semibold text-slate-700 transition hover:bg-slate-50"
+            >
+              Cancel
+            </button>
+
+            <button
+              type="submit"
+              className="rounded-xl bg-indigo-600 px-6 py-3 font-semibold text-white shadow-sm transition hover:bg-indigo-700 hover:shadow-md"
+            >
+              Add Task
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   )
 }
