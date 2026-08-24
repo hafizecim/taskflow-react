@@ -78,6 +78,7 @@ function AddTask() {
       createdAt: new Date().toISOString(),
       isPinned: false,
       isFavorite: false,
+      isDeleted: false,
     }
 
     addTask(newTask)

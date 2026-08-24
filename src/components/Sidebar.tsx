@@ -1,9 +1,8 @@
 import {
   CheckSquare,
   Heart,
-  PinIcon,
   Plus,
-  House,
+  Trash2,
 } from 'lucide-react'
 import { NavLink } from 'react-router-dom'
 
@@ -30,11 +29,10 @@ function Sidebar() {
       <nav className="space-y-2">
         <NavLink
           to="/"
-          end
           className={getNavLinkClass}
         >
           <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/20">
-            <House size={18} />
+            ⌂
           </span>
 
           <span>Dashboard</span>
@@ -54,7 +52,6 @@ function Sidebar() {
 
         <NavLink
           to="/tasks/new"
-          end
           className={getNavLinkClass}
         >
           <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/20">
@@ -65,33 +62,28 @@ function Sidebar() {
         </NavLink>
 
         <NavLink
-          to="/pinned"
-          end
-          className={getNavLinkClass}
-        >
-          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/20">
-            <PinIcon
-              size={18}
-              strokeWidth={2}
-            />
-          </span>
-
-          <span>Pinned</span>
-        </NavLink>
-
-        <NavLink
           to="/favorites"
-          end
           className={getNavLinkClass}
         >
           <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/20">
             <Heart
               size={18}
-              strokeWidth={2}
+              fill="currentColor"
             />
           </span>
 
           <span>Favorites</span>
+        </NavLink>
+
+        <NavLink
+          to="/trash"
+          className={getNavLinkClass}
+        >
+          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/20">
+            <Trash2 size={18} />
+          </span>
+
+          <span>Trash</span>
         </NavLink>
       </nav>
 

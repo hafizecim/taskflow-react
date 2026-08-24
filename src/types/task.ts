@@ -15,4 +15,5 @@ export interface Task {
   createdAt: string
   isPinned: boolean
   isFavorite: boolean
+  isDeleted: boolean
 }

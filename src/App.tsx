@@ -1,13 +1,14 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 import MainLayout from './layouts/MainLayout'
+
 import Dashboard from './pages/Dashboard'
 import Tasks from './pages/Tasks'
 import TaskDetail from './pages/TaskDetail'
 import EditTask from './pages/EditTask'
 import AddTask from './pages/AddTask'
 import Favorites from './pages/Favorites'
-import Pinned from './pages/Pinned'
+import Trash from './pages/Trash'
 
 import { TaskProvider } from './context/TaskProvider'
 
@@ -48,8 +49,8 @@ function App() {
             />
 
             <Route
-              path="/pinned"
-              element={<Pinned />}
+              path="/trash"
+              element={<Trash />}
             />
           </Route>
         </Routes>

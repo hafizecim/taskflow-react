@@ -3,7 +3,6 @@ import { useEffect, type ReactNode } from 'react'
 import type { Task } from '../types/task'
 
 import useFetch from '../hooks/useFetch'
-
 import useLocalStorage from '../hooks/useLocalStorage'
 
 import { TaskContext } from './TaskContext'
@@ -29,21 +28,28 @@ export function TaskProvider({
 
   useEffect(() => {
     if (tasks.length === 0 && fetchedTasks) {
-      const tasksWithPinStatus = fetchedTasks.map(
+      const tasksWithStatus = fetchedTasks.map(
         (task) => ({
           ...task,
           isPinned: task.isPinned ?? false,
+          isFavorite: task.isFavorite ?? false,
+          isDeleted: task.isDeleted ?? false,
         }),
       )
 
-      setTasks(tasksWithPinStatus)
+      setTasks(tasksWithStatus)
     }
   }, [fetchedTasks, tasks.length, setTasks])
 
   const addTask = (task: Task) => {
     setTasks((currentTasks) => [
       ...currentTasks,
-      task,
+      {
+        ...task,
+        isPinned: task.isPinned ?? false,
+        isFavorite: task.isFavorite ?? false,
+        isDeleted: false,
+      },
     ])
   }
 
@@ -59,6 +65,32 @@ export function TaskProvider({
 
   const deleteTask = (id: string) => {
     setTasks((currentTasks) =>
+      currentTasks.map((task) =>
+        task.id === id
+          ? {
+              ...task,
+              isDeleted: true,
+            }
+          : task,
+      ),
+    )
+  }
+
+  const restoreTask = (id: string) => {
+    setTasks((currentTasks) =>
+      currentTasks.map((task) =>
+        task.id === id
+          ? {
+              ...task,
+              isDeleted: false,
+            }
+          : task,
+      ),
+    )
+  }
+
+  const permanentDeleteTask = (id: string) => {
+    setTasks((currentTasks) =>
       currentTasks.filter(
         (task) => task.id !== id,
       ),
@@ -66,30 +98,30 @@ export function TaskProvider({
   }
 
   const toggleFavorite = (id: string) => {
-  setTasks((currentTasks) =>
-    currentTasks.map((task) =>
-      task.id === id
-        ? {
-            ...task,
-            isFavorite: !task.isFavorite,
-          }
-        : task,
-    ),
-  )
-}
+    setTasks((currentTasks) =>
+      currentTasks.map((task) =>
+        task.id === id
+          ? {
+              ...task,
+              isFavorite: !task.isFavorite,
+            }
+          : task,
+      ),
+    )
+  }
 
   const togglePin = (id: string) => {
-  setTasks((currentTasks) =>
-    currentTasks.map((task) =>
-      task.id === id
-        ? {
-            ...task,
-            isPinned: !task.isPinned,
-          }
-        : task,
-    ),
-  )
-}
+    setTasks((currentTasks) =>
+      currentTasks.map((task) =>
+        task.id === id
+          ? {
+              ...task,
+              isPinned: !task.isPinned,
+            }
+          : task,
+      ),
+    )
+  }
 
   return (
     <TaskContext.Provider
@@ -101,6 +133,8 @@ export function TaskProvider({
         addTask,
         updateTask,
         deleteTask,
+        restoreTask,
+        permanentDeleteTask,
         togglePin,
         toggleFavorite,
       }}
