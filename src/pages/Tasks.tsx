@@ -126,14 +126,25 @@ function Tasks() {
 
   return (
     <div className="p-6">
-      <div className="mb-6">
-        <h1 className="text-3xl font-bold text-gray-900">
-          Tasks
-        </h1>
+      <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <h1 className="text-3xl font-bold text-gray-900">
+            Tasks
+          </h1>
 
-        <p className="mt-2 text-gray-600">
-          Manage, search and filter your tasks.
-        </p>
+          <p className="mt-2 text-gray-600">
+            Manage, search and filter your tasks.
+          </p>
+        </div>
+
+        <button
+          type="button"
+          onClick={() => navigate('/tasks/new')}
+          className="inline-flex items-center justify-center gap-2 rounded-xl border border-indigo-200 bg-indigo-50 px-5 py-3 font-semibold text-indigo-700 shadow-sm transition hover:bg-indigo-100 hover:shadow-md"
+        >
+          <span className="text-lg">+</span>
+          Add Task
+        </button>
       </div>
 
       <div className="mb-6 rounded-xl border bg-white p-5 shadow-sm">
