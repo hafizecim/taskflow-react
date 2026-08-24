@@ -30,6 +30,7 @@ function Sidebar() {
       <nav className="space-y-2">
         <NavLink
           to="/"
+          end
           className={getNavLinkClass}
         >
           <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/20">
@@ -41,6 +42,7 @@ function Sidebar() {
 
         <NavLink
           to="/tasks"
+          end
           className={getNavLinkClass}
         >
           <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/20">
@@ -52,6 +54,7 @@ function Sidebar() {
 
         <NavLink
           to="/tasks/new"
+          end
           className={getNavLinkClass}
         >
           <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/20">
@@ -63,6 +66,7 @@ function Sidebar() {
 
         <NavLink
           to="/pinned"
+          end
           className={getNavLinkClass}
         >
           <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/20">
@@ -77,6 +81,7 @@ function Sidebar() {
 
         <NavLink
           to="/favorites"
+          end
           className={getNavLinkClass}
         >
           <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/20">
