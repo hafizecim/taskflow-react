@@ -15,6 +15,7 @@ function Tasks() {
     tasks,
     loading,
     error,
+    refetch,
     deleteTask,
   } = useTasks()
 
@@ -77,8 +78,10 @@ function Tasks() {
 
   if (loading && tasks.length === 0) {
     return (
-      <div className="flex min-h-[400px] items-center justify-center">
-        <p className="text-lg text-gray-600">
+      <div className="flex min-h-[400px] flex-col items-center justify-center gap-4">
+        <div className="h-10 w-10 animate-spin rounded-full border-4 border-blue-200 border-t-blue-600" />
+
+        <p className="text-lg font-medium text-gray-600">
           Loading tasks...
         </p>
       </div>
@@ -88,23 +91,43 @@ function Tasks() {
   if (error && tasks.length === 0) {
     return (
       <div className="flex min-h-[400px] flex-col items-center justify-center gap-4">
-        <p className="text-red-600">
-          Failed to load tasks.
-        </p>
+        <div className="rounded-xl border border-red-200 bg-red-50 p-6 text-center">
+          <h2 className="mb-2 text-xl font-bold text-red-700">
+            Failed to load tasks
+          </h2>
+
+          <p className="mb-4 text-red-600">
+            Something went wrong while loading the tasks.
+          </p>
+
+          <button
+            type="button"
+            onClick={refetch}
+            className="rounded-lg bg-blue-600 px-5 py-2 font-medium text-white transition hover:bg-blue-700"
+          >
+            Try Again
+          </button>
+        </div>
       </div>
     )
   }
 
   return (
     <div className="p-6">
-      <h1 className="mb-6 text-3xl font-bold">
-        Tasks
-      </h1>
+      <div className="mb-6">
+        <h1 className="text-3xl font-bold text-gray-900">
+          Tasks
+        </h1>
+
+        <p className="mt-2 text-gray-600">
+          Manage, search and filter your tasks.
+        </p>
+      </div>
 
       <div className="mb-6 rounded-xl border bg-white p-5 shadow-sm">
         <div className="grid gap-4 md:grid-cols-3">
           <div>
-            <label className="mb-2 block text-sm font-medium">
+            <label className="mb-2 block text-sm font-medium text-gray-700">
               Search Tasks
             </label>
 
@@ -120,7 +143,7 @@ function Tasks() {
           </div>
 
           <div>
-            <label className="mb-2 block text-sm font-medium">
+            <label className="mb-2 block text-sm font-medium text-gray-700">
               Status
             </label>
 
@@ -135,11 +158,18 @@ function Tasks() {
               }
               className="w-full rounded-lg border px-4 py-2"
             >
-              <option value="">All statuses</option>
-              <option value="Todo">Todo</option>
+              <option value="">
+                All statuses
+              </option>
+
+              <option value="Todo">
+                Todo
+              </option>
+
               <option value="In Progress">
                 In Progress
               </option>
+
               <option value="Completed">
                 Completed
               </option>
@@ -147,7 +177,7 @@ function Tasks() {
           </div>
 
           <div>
-            <label className="mb-2 block text-sm font-medium">
+            <label className="mb-2 block text-sm font-medium text-gray-700">
               Priority
             </label>
 
@@ -165,14 +195,23 @@ function Tasks() {
               <option value="">
                 All priorities
               </option>
-              <option value="Low">Low</option>
-              <option value="Medium">Medium</option>
-              <option value="High">High</option>
+
+              <option value="Low">
+                Low
+              </option>
+
+              <option value="Medium">
+                Medium
+              </option>
+
+              <option value="High">
+                High
+              </option>
             </select>
           </div>
         </div>
 
-        <div className="mt-4 flex items-center justify-between">
+        <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
           <p className="text-sm text-gray-600">
             Showing {filteredTasks.length} of{' '}
             {tasks.length} tasks
@@ -181,7 +220,7 @@ function Tasks() {
           <button
             type="button"
             onClick={handleClearFilters}
-            className="rounded-lg border px-4 py-2 text-sm font-medium hover:bg-gray-50"
+            className="rounded-lg border px-4 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-50"
           >
             Clear Filters
           </button>
@@ -199,9 +238,9 @@ function Tasks() {
           {filteredTasks.map((task) => (
             <div
               key={task.id}
-              className="rounded-xl border bg-white p-5 shadow-sm"
+              className="rounded-xl border bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
             >
-              <h2 className="mb-2 text-xl font-semibold">
+              <h2 className="mb-2 text-xl font-semibold text-gray-900">
                 {task.title}
               </h2>
 
@@ -209,7 +248,7 @@ function Tasks() {
                 {task.description}
               </p>
 
-              <div className="space-y-1 text-sm">
+              <div className="space-y-1 text-sm text-gray-700">
                 <p>
                   <strong>Category:</strong>{' '}
                   {task.category}
@@ -237,7 +276,7 @@ function Tasks() {
                   onClick={() =>
                     navigate(`/tasks/${task.id}`)
                   }
-                  className="rounded-lg border px-4 py-2 text-sm font-medium hover:bg-gray-50"
+                  className="rounded-lg border px-4 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-50"
                 >
                   View Details
                 </button>
@@ -249,7 +288,7 @@ function Tasks() {
                       `/tasks/${task.id}/edit`,
                     )
                   }
-                  className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
+                  className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-blue-700"
                 >
                   Edit
                 </button>
@@ -259,7 +298,7 @@ function Tasks() {
                   onClick={() =>
                     handleDelete(task.id)
                   }
-                  className="rounded-lg bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700"
+                  className="rounded-lg bg-red-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-red-700"
                 >
                   Delete
                 </button>

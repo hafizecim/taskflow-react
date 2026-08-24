@@ -1,7 +1,11 @@
 import { useEffect, type ReactNode } from 'react'
+
 import type { Task } from '../types/task'
+
 import useFetch from '../hooks/useFetch'
+
 import useLocalStorage from '../hooks/useLocalStorage'
+
 import { TaskContext } from './TaskContext'
 
 interface TaskProviderProps {
@@ -20,6 +24,7 @@ export function TaskProvider({
     data: fetchedTasks,
     loading,
     error,
+    refetch,
   } = useFetch<Task[]>('/tasks.json')
 
   useEffect(() => {
@@ -59,6 +64,7 @@ export function TaskProvider({
         tasks,
         loading,
         error,
+        refetch,
         addTask,
         updateTask,
         deleteTask,

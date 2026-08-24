@@ -5,6 +5,7 @@ export interface TaskContextType {
   tasks: Task[]
   loading: boolean
   error: string | null
+  refetch: () => Promise<void>
   addTask: (task: Task) => void
   updateTask: (task: Task) => void
   deleteTask: (id: string) => void
