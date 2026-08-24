@@ -9,6 +9,7 @@ function Dashboard() {
     tasks,
     loading,
     error,
+    refetch,
   } = useTasks()
 
   const totalTasks = tasks.length
@@ -28,9 +29,15 @@ function Dashboard() {
   if (loading && tasks.length === 0) {
     return (
       <div className="flex min-h-[500px] items-center justify-center bg-slate-50">
-        <div className="rounded-2xl border bg-white px-8 py-6 shadow-sm">
+        <div className="rounded-2xl border border-slate-200 bg-white px-8 py-7 text-center shadow-sm">
+          <div className="mx-auto mb-4 h-10 w-10 animate-spin rounded-full border-4 border-indigo-100 border-t-indigo-600" />
+
           <p className="text-lg font-medium text-slate-600">
             Loading dashboard...
+          </p>
+
+          <p className="mt-1 text-sm text-slate-400">
+            Please wait while your tasks are loading.
           </p>
         </div>
       </div>
@@ -40,14 +47,27 @@ function Dashboard() {
   if (error && tasks.length === 0) {
     return (
       <div className="flex min-h-[500px] items-center justify-center bg-slate-50 p-6">
-        <div className="max-w-md rounded-2xl border border-red-200 bg-red-50 p-6 text-center">
+        <div className="max-w-md rounded-2xl border border-red-200 bg-red-50 p-7 text-center shadow-sm">
+          <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-red-100 text-xl text-red-600">
+            !
+          </div>
+
           <h2 className="mb-2 text-xl font-bold text-red-700">
             Unable to load dashboard
           </h2>
 
-          <p className="text-red-600">
-            Failed to load dashboard data.
+          <p className="mb-5 text-sm leading-6 text-red-600">
+            We could not load your task data.
+            Please try again.
           </p>
+
+          <button
+            type="button"
+            onClick={refetch}
+            className="rounded-xl bg-indigo-600 px-5 py-2.5 font-semibold text-white shadow-sm transition hover:bg-indigo-700 hover:shadow-md"
+          >
+            Try Again
+          </button>
         </div>
       </div>
     )
