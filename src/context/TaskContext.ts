@@ -9,6 +9,7 @@ export interface TaskContextType {
   addTask: (task: Task) => void
   updateTask: (task: Task) => void
   deleteTask: (id: string) => void
+  togglePin: (id: string) => void
 }
 
 export const TaskContext = createContext<

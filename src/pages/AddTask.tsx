@@ -76,6 +76,7 @@ function AddTask() {
       status,
       dueDate,
       createdAt: new Date().toISOString(),
+      isPinned: false,
     }
 
     addTask(newTask)

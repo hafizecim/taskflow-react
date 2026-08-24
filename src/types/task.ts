@@ -1,6 +1,8 @@
-export type TaskStatus = 'Todo' | 'In Progress' | 'Completed'
+export type TaskStatus =
+  'Todo' | 'In Progress' | 'Completed'
 
-export type TaskPriority = 'Low' | 'Medium' | 'High'
+export type TaskPriority =
+  'Low' | 'Medium' | 'High'
 
 export interface Task {
   id: string
@@ -11,4 +13,5 @@ export interface Task {
   status: TaskStatus
   dueDate: string
   createdAt: string
+  isPinned: boolean
 }

@@ -29,7 +29,14 @@ export function TaskProvider({
 
   useEffect(() => {
     if (tasks.length === 0 && fetchedTasks) {
-      setTasks(fetchedTasks)
+      const tasksWithPinStatus = fetchedTasks.map(
+        (task) => ({
+          ...task,
+          isPinned: task.isPinned ?? false,
+        }),
+      )
+
+      setTasks(tasksWithPinStatus)
     }
   }, [fetchedTasks, tasks.length, setTasks])
 
@@ -58,6 +65,19 @@ export function TaskProvider({
     )
   }
 
+  const togglePin = (id: string) => {
+  setTasks((currentTasks) =>
+    currentTasks.map((task) =>
+      task.id === id
+        ? {
+            ...task,
+            isPinned: !task.isPinned,
+          }
+        : task,
+    ),
+  )
+}
+
   return (
     <TaskContext.Provider
       value={{
@@ -68,6 +88,7 @@ export function TaskProvider({
         addTask,
         updateTask,
         deleteTask,
+        togglePin,
       }}
     >
       {children}

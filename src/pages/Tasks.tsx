@@ -2,6 +2,7 @@ import {
   Eye,
   Pencil,
   Trash2,
+  PinIcon,
 } from 'lucide-react'
 
 import { useMemo, useState } from 'react'
@@ -25,6 +26,7 @@ function Tasks() {
     error,
     refetch,
     deleteTask,
+    togglePin,
   } = useTasks()
 
   const [searchTerm, setSearchTerm] = useState('')
@@ -248,6 +250,32 @@ function Tasks() {
               key={task.id}
               className="rounded-xl border bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
             >
+              <div className="mb-3 flex justify-end">
+                <button
+                  type="button"
+                  onClick={() => togglePin(task.id)}
+                  title={
+                    task.isPinned
+                      ? 'Unpin task'
+                      : 'Pin task'
+                  }
+                  className={`rounded-lg p-2 transition ${
+                    task.isPinned
+                      ? 'bg-indigo-100 text-indigo-600 hover:bg-indigo-200'
+                      : 'text-slate-400 hover:bg-indigo-50 hover:text-indigo-500'
+                  }`}
+                >
+                  <PinIcon
+                    size={18}
+                    strokeWidth={2}
+                    fill={
+                      task.isPinned
+                        ? 'currentColor'
+                        : 'none'
+                    }
+                  />
+                </button>
+              </div>
               <h2 className="mb-2 text-xl font-semibold text-gray-900">
                 {task.title}
               </h2>
