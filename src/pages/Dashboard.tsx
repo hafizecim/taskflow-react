@@ -26,6 +26,31 @@ function Dashboard() {
     (task) => task.status === 'Completed',
   ).length
 
+  const highPriorityTasks = tasks.filter(
+    (task) => task.priority === 'High',
+  ).length
+
+  const today = new Date().toISOString().split('T')[0]
+
+  const overdueTasks = tasks.filter(
+    (task) =>
+      task.dueDate < today &&
+      task.status !== 'Completed',
+  ).length
+
+  const dueTodayTasks = tasks.filter(
+    (task) =>
+      task.dueDate === today &&
+      task.status !== 'Completed',
+  ).length
+
+  const completionRate =
+    totalTasks === 0
+      ? 0
+      : Math.round(
+          (completedTasks / totalTasks) * 100,
+        )
+
   if (loading && tasks.length === 0) {
     return (
       <div className="flex min-h-[500px] items-center justify-center bg-slate-50">
@@ -84,8 +109,6 @@ function Dashboard() {
   return (
     <div className="min-h-full bg-slate-50 p-6">
       <div className="mx-auto max-w-7xl">
-        {/* Header */}
-
         <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <p className="mb-1 text-sm font-semibold uppercase tracking-wide text-indigo-600">
@@ -110,91 +133,87 @@ function Dashboard() {
           </button>
         </div>
 
-        {/* Statistics */}
-
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {/* Total */}
+          <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+            <p className="text-sm font-medium text-emerald-500">
+              Total Tasks
+            </p>
 
-          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-slate-500">
-                  Total Tasks
-                </p>
-
-                <p className="mt-2 text-3xl font-bold text-slate-900">
-                  {totalTasks}
-                </p>
-              </div>
-
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-indigo-100 text-xl text-indigo-600">
-                ✓
-              </div>
-            </div>
+            <p className="mt-2 text-3xl font-bold text-emerald-900">
+              {totalTasks}
+            </p>
           </div>
-
-          {/* Todo */}
 
           <div className="rounded-2xl border border-amber-200 bg-amber-50 p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-amber-700">
-                  Todo
-                </p>
+            <p className="text-sm font-medium text-amber-700">
+              Todo
+            </p>
 
-                <p className="mt-2 text-3xl font-bold text-amber-900">
-                  {todoTasks}
-                </p>
-              </div>
-
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-amber-200 text-xl text-amber-800">
-                ○
-              </div>
-            </div>
+            <p className="mt-2 text-3xl font-bold text-amber-900">
+              {todoTasks}
+            </p>
           </div>
-
-          {/* In Progress */}
 
           <div className="rounded-2xl border border-blue-200 bg-blue-50 p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-blue-700">
-                  In Progress
-                </p>
+            <p className="text-sm font-medium text-blue-700">
+              In Progress
+            </p>
 
-                <p className="mt-2 text-3xl font-bold text-blue-900">
-                  {inProgressTasks}
-                </p>
-              </div>
-
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-200 text-xl text-blue-800">
-                →
-              </div>
-            </div>
+            <p className="mt-2 text-3xl font-bold text-blue-900">
+              {inProgressTasks}
+            </p>
           </div>
 
-          {/* Completed */}
+          <div className="rounded-2xl border border-pink-200 bg-pink-50 p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+            <p className="text-sm font-medium text-pink-700">
+              Completed
+            </p>
 
-          <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-emerald-700">
-                  Completed
-                </p>
+            <p className="mt-2 text-3xl font-bold text-pink-900">
+              {completedTasks}
+            </p>
+          </div>
 
-                <p className="mt-2 text-3xl font-bold text-emerald-900">
-                  {completedTasks}
-                </p>
-              </div>
+          <div className="rounded-2xl border border-rose-200 bg-rose-50 p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+            <p className="text-sm font-medium text-rose-700">
+              Completion Rate
+            </p>
 
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-200 text-xl text-emerald-800">
-                ✓
-              </div>
-            </div>
+            <p className="mt-2 text-3xl font-bold text-rose-900">
+              {completionRate}%
+            </p>
+          </div>
+
+          <div className="rounded-2xl border border-green-200 border-green-150 p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+            <p className="text-sm font-medium text-green-700">
+              High Priority
+            </p>
+
+            <p className="mt-2 text-3xl font-bold text-green-900">
+              {highPriorityTasks}
+            </p>
+          </div>
+
+          <div className="rounded-2xl border border-orange-200 bg-orange-50 p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+            <p className="text-sm font-medium text-orange-700">
+              Overdue
+            </p>
+
+            <p className="mt-2 text-3xl font-bold text-orange-900">
+              {overdueTasks}
+            </p>
+          </div>
+
+          <div className="rounded-2xl border border-violet-200 bg-violet-50 p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+            <p className="text-sm font-medium text-violet-700">
+              Due Today
+            </p>
+
+            <p className="mt-2 text-3xl font-bold text-violet-900">
+              {dueTodayTasks}
+            </p>
           </div>
         </div>
-
-        {/* Recent Tasks */}
 
         <div className="mt-8 rounded-2xl border border-slate-200 bg-white shadow-sm">
           <div className="flex flex-col gap-3 border-b border-slate-100 p-6 sm:flex-row sm:items-center sm:justify-between">
