@@ -1,3 +1,4 @@
+import { Heart } from 'lucide-react'
 import { NavLink } from 'react-router-dom'
 
 function Sidebar() {
@@ -41,6 +42,17 @@ function Sidebar() {
           </span>
 
           <span>Tasks</span>
+        </NavLink>
+
+        <NavLink
+          to="/favorites"
+          className={getNavLinkClass}
+        >
+          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/20">
+            <Heart size={18} />
+          </span>
+
+          <span>Favorites</span>
         </NavLink>
       </nav>
 

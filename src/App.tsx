@@ -1,12 +1,14 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
+
 import MainLayout from './layouts/MainLayout'
 import Dashboard from './pages/Dashboard'
 import Tasks from './pages/Tasks'
+import Favorites from './pages/Favorites'
 import TaskDetail from './pages/TaskDetail'
 import EditTask from './pages/EditTask'
 import AddTask from './pages/AddTask'
-import { TaskProvider } from './context/TaskProvider'
 
+import { TaskProvider } from './context/TaskProvider'
 
 function App() {
   return (
@@ -14,16 +16,31 @@ function App() {
       <TaskProvider>
         <Routes>
           <Route element={<MainLayout />}>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/tasks" element={<Tasks />} />
+            <Route
+              path="/"
+              element={<Dashboard />}
+            />
+
+            <Route
+              path="/tasks"
+              element={<Tasks />}
+            />
+
+            <Route
+              path="/favorites"
+              element={<Favorites />}
+            />
+
             <Route
               path="/tasks/new"
               element={<AddTask />}
             />
+
             <Route
               path="/tasks/:id"
               element={<TaskDetail />}
             />
+
             <Route
               path="/tasks/:id/edit"
               element={<EditTask />}
