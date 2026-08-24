@@ -3,6 +3,7 @@ import {
   Pencil,
   Trash2,
   PinIcon,
+  Heart,
 } from 'lucide-react'
 
 import { useMemo, useState } from 'react'
@@ -27,6 +28,7 @@ function Tasks() {
     refetch,
     deleteTask,
     togglePin,
+    toggleFavorite,
   } = useTasks()
 
   const [searchTerm, setSearchTerm] = useState('')
@@ -250,35 +252,65 @@ function Tasks() {
               key={task.id}
               className="rounded-xl border bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
             >
-              <div className="mb-3 flex justify-end">
-                <button
-                  type="button"
-                  onClick={() => togglePin(task.id)}
-                  title={
-                    task.isPinned
-                      ? 'Unpin task'
-                      : 'Pin task'
-                  }
-                  className={`rounded-lg p-2 transition ${
-                    task.isPinned
-                      ? 'bg-indigo-100 text-indigo-600 hover:bg-indigo-200'
-                      : 'text-slate-400 hover:bg-indigo-50 hover:text-indigo-500'
-                  }`}
-                >
-                  <PinIcon
-                    size={18}
-                    strokeWidth={2}
-                    fill={
+              <div className="mb-2 flex items-start justify-between gap-3">
+                <h2 className="min-w-0 text-xl font-semibold text-gray-900">
+                  {task.title}
+                </h2>
+
+                <div className="flex shrink-0 gap-1">
+                  <button
+                    type="button"
+                    onClick={() => togglePin(task.id)}
+                    title={
                       task.isPinned
-                        ? 'currentColor'
-                        : 'none'
+                        ? 'Unpin task'
+                        : 'Pin task'
                     }
-                  />
-                </button>
+                    className={`rounded-lg p-2 transition ${
+                      task.isPinned
+                        ? 'bg-indigo-100 text-indigo-600 hover:bg-indigo-200'
+                        : 'bg-slate-50 text-slate-400 hover:bg-indigo-50 hover:text-indigo-500'
+                    }`}
+                  >
+                    <PinIcon
+                      size={18}
+                      strokeWidth={2}
+                      fill={
+                        task.isPinned
+                          ? 'currentColor'
+                          : 'none'
+                      }
+                    />
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() =>
+                      toggleFavorite(task.id)
+                    }
+                    title={
+                      task.isFavorite
+                        ? 'Remove from favorites'
+                        : 'Add to favorites'
+                    }
+                    className={`rounded-lg p-2 transition ${
+                      task.isFavorite
+                        ? 'bg-pink-100 text-pink-600 hover:bg-pink-200'
+                        : 'bg-slate-50 text-slate-400 hover:bg-pink-50 hover:text-pink-500'
+                    }`}
+                  >
+                    <Heart
+                      size={18}
+                      fill={
+                        task.isFavorite
+                          ? 'currentColor'
+                          : 'none'
+                      }
+                    />
+                  </button>
+                </div>
               </div>
-              <h2 className="mb-2 text-xl font-semibold text-gray-900">
-                {task.title}
-              </h2>
+              
 
               <p className="mb-4 text-gray-600">
                 {task.description}

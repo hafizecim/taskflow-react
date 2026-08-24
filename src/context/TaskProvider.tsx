@@ -65,6 +65,19 @@ export function TaskProvider({
     )
   }
 
+  const toggleFavorite = (id: string) => {
+  setTasks((currentTasks) =>
+    currentTasks.map((task) =>
+      task.id === id
+        ? {
+            ...task,
+            isFavorite: !task.isFavorite,
+          }
+        : task,
+    ),
+  )
+}
+
   const togglePin = (id: string) => {
   setTasks((currentTasks) =>
     currentTasks.map((task) =>
@@ -89,6 +102,7 @@ export function TaskProvider({
         updateTask,
         deleteTask,
         togglePin,
+        toggleFavorite,
       }}
     >
       {children}

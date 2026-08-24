@@ -14,4 +14,5 @@ export interface Task {
   dueDate: string
   createdAt: string
   isPinned: boolean
+  isFavorite: boolean
 }

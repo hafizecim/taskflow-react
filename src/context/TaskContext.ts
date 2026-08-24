@@ -10,6 +10,7 @@ export interface TaskContextType {
   updateTask: (task: Task) => void
   deleteTask: (id: string) => void
   togglePin: (id: string) => void
+  toggleFavorite: (id: string) => void
 }
 
 export const TaskContext = createContext<
