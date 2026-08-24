@@ -1,3 +1,9 @@
+import {
+  Eye,
+  Pencil,
+  Trash2,
+} from 'lucide-react'
+
 import { useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -7,6 +13,8 @@ import type {
   TaskPriority,
   TaskStatus,
 } from '../types/task'
+
+
 
 function Tasks() {
   const navigate = useNavigate()
@@ -220,7 +228,7 @@ function Tasks() {
           <button
             type="button"
             onClick={handleClearFilters}
-            className="rounded-lg border px-4 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-50"
+            className="rounded-lg border border-indigo-200 bg-indigo-50 px-4 py-2 text-sm font-semibold text-indigo-700 transition hover:bg-indigo-100"
           >
             Clear Filters
           </button>
@@ -298,9 +306,10 @@ function Tasks() {
                   onClick={() =>
                     navigate(`/tasks/${task.id}`)
                   }
-                  className="rounded-lg border px-4 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-50"
+                  className="inline-flex items-center gap-2 rounded-lg border border-green-200 bg-green-50 px-4 py-2 text-sm font-semibold text-green-700 transition hover:bg-green-100"
                 >
-                  View Details
+                  <Eye size={16} />
+                  View
                 </button>
 
                 <button
@@ -310,8 +319,9 @@ function Tasks() {
                       `/tasks/${task.id}/edit`,
                     )
                   }
-                  className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-blue-700"
+                  className="inline-flex items-center gap-2 rounded-lg border border-amber-200 bg-amber-50 px-4 py-2 text-sm font-semibold text-amber-700 transition hover:bg-amber-100"
                 >
+                  <Pencil size={16} />
                   Edit
                 </button>
 
@@ -320,8 +330,9 @@ function Tasks() {
                   onClick={() =>
                     handleDelete(task.id)
                   }
-                  className="rounded-lg bg-red-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-red-700"
+                  className="inline-flex items-center gap-2 rounded-lg border border-rose-200 bg-rose-50 px-4 py-2 text-sm font-semibold text-rose-700 transition hover:bg-rose-100"
                 >
+                  <Trash2 size={16} />
                   Delete
                 </button>
               </div>
