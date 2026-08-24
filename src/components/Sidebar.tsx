@@ -1,4 +1,4 @@
-import { Heart } from 'lucide-react'
+import { Heart, Plus } from 'lucide-react'
 import { NavLink } from 'react-router-dom'
 
 function Sidebar() {
@@ -22,8 +22,11 @@ function Sidebar() {
       </div>
 
       <nav className="space-y-2">
+        {/* Dashboard */}
+
         <NavLink
           to="/"
+          end
           className={getNavLinkClass}
         >
           <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/20">
@@ -33,8 +36,11 @@ function Sidebar() {
           <span>Dashboard</span>
         </NavLink>
 
+        {/* Tasks */}
+
         <NavLink
           to="/tasks"
+          end
           className={getNavLinkClass}
         >
           <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/20">
@@ -43,6 +49,21 @@ function Sidebar() {
 
           <span>Tasks</span>
         </NavLink>
+
+        {/* Add Task */}
+
+        <NavLink
+          to="/tasks/new"
+          className={getNavLinkClass}
+        >
+          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/20">
+            <Plus size={18} />
+          </span>
+
+          <span>Add Task</span>
+        </NavLink>
+
+        {/* Favorites */}
 
         <NavLink
           to="/favorites"
