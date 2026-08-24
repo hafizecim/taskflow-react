@@ -254,15 +254,37 @@ function Tasks() {
                   {task.category}
                 </p>
 
-                <p>
-                  <strong>Priority:</strong>{' '}
-                  {task.priority}
-                </p>
+                <div className="flex items-center gap-2">
+                  <strong>Priority:</strong>
 
-                <p>
-                  <strong>Status:</strong>{' '}
-                  {task.status}
-                </p>
+                  <span
+                    className={`rounded-full px-3 py-1 text-xs font-semibold ${
+                      task.priority === 'High'
+                        ? 'bg-red-100 text-red-700'
+                        : task.priority === 'Medium'
+                          ? 'bg-orange-100 text-orange-700'
+                          : 'bg-green-100 text-green-700'
+                    }`}
+                  >
+                    {task.priority}
+                  </span>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <strong>Status:</strong>
+
+                  <span
+                    className={`rounded-full px-3 py-1 text-xs font-semibold ${
+                      task.status === 'Completed'
+                        ? 'bg-emerald-100 text-emerald-700'
+                        : task.status === 'In Progress'
+                          ? 'bg-blue-100 text-blue-700'
+                          : 'bg-amber-100 text-amber-700'
+                    }`}
+                  >
+                    {task.status}
+                  </span>
+                </div>
 
                 <p>
                   <strong>Due Date:</strong>{' '}
