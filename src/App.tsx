@@ -11,6 +11,7 @@ import Favorites from './pages/Favorites'
 import Trash from './pages/Trash'
 import Calendar from './pages/Calendar'
 import Reports from './pages/Reports'
+import Settings from './pages/Settings'
 
 import { TaskProvider } from './context/TaskProvider'
 
@@ -39,7 +40,7 @@ function App() {
               path="/reports"
               element={<Reports />}
             />
-            
+
             <Route
               path="/tasks/new"
               element={<AddTask />}
@@ -64,6 +65,12 @@ function App() {
               path="/trash"
               element={<Trash />}
             />
+
+            <Route
+              path="/settings"
+              element={<Settings />}
+            />
+            
           </Route>
         </Routes>
       </TaskProvider>

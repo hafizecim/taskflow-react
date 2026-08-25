@@ -4,6 +4,7 @@ import {
   CheckSquare,
   Heart,
   Plus,
+  Settings,
   Trash2,
 } from 'lucide-react'
 
@@ -87,7 +88,7 @@ function Sidebar() {
           <span>Reports</span>
         </NavLink>
 
-        
+
         <NavLink
           to="/favorites"
           className={getNavLinkClass}
@@ -113,6 +114,17 @@ function Sidebar() {
           <span>Trash</span>
         </NavLink>
       </nav>
+
+      <NavLink
+        to="/settings"
+        className={getNavLinkClass}
+      >
+        <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/20">
+          <Settings size={18} />
+        </span>
+
+        <span>Settings</span>
+      </NavLink>
 
       <div className="mt-8 rounded-2xl bg-slate-50 p-4">
         <p className="text-sm font-semibold text-slate-800">
