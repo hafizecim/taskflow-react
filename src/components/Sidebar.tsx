@@ -1,9 +1,11 @@
 import {
+  CalendarDays,
   CheckSquare,
   Heart,
   Plus,
   Trash2,
 } from 'lucide-react'
+
 import { NavLink } from 'react-router-dom'
 
 function Sidebar() {
@@ -59,6 +61,17 @@ function Sidebar() {
           </span>
 
           <span>Add Task</span>
+        </NavLink>
+
+        <NavLink
+          to="/calendar"
+          className={getNavLinkClass}
+        >
+          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/20">
+            <CalendarDays size={18} />
+          </span>
+
+          <span>Calendar</span>
         </NavLink>
 
         <NavLink
