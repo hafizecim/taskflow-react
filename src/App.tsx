@@ -10,6 +10,7 @@ import AddTask from './pages/AddTask'
 import Favorites from './pages/Favorites'
 import Trash from './pages/Trash'
 import Calendar from './pages/Calendar'
+import Reports from './pages/Reports'
 
 import { TaskProvider } from './context/TaskProvider'
 
@@ -34,6 +35,11 @@ function App() {
               element={<Calendar />}
             />
 
+            <Route
+              path="/reports"
+              element={<Reports />}
+            />
+            
             <Route
               path="/tasks/new"
               element={<AddTask />}
