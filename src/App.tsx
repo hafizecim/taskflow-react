@@ -12,6 +12,7 @@ import Trash from './pages/Trash'
 import Calendar from './pages/Calendar'
 import Reports from './pages/Reports'
 import Settings from './pages/Settings'
+import About from './pages/About'
 
 import { TaskProvider } from './context/TaskProvider'
 
@@ -70,7 +71,12 @@ function App() {
               path="/settings"
               element={<Settings />}
             />
-            
+
+            <Route
+              path="/about"
+              element={<About />}
+            />
+
           </Route>
         </Routes>
       </TaskProvider>

@@ -3,6 +3,7 @@ import {
   CalendarDays,
   CheckSquare,
   Heart,
+  Info,
   Plus,
   Settings,
   Trash2,
@@ -24,6 +25,7 @@ function Sidebar() {
 
   return (
     <aside className="hidden min-h-[calc(100vh-64px)] w-64 shrink-0 border-r border-slate-200 bg-white p-5 md:block">
+      
       <div className="mb-6">
         <p className="px-3 text-xs font-semibold uppercase tracking-wider text-slate-400">
           Navigation
@@ -124,6 +126,17 @@ function Sidebar() {
         </span>
 
         <span>Settings</span>
+      </NavLink>
+
+      <NavLink
+        to="/about"
+        className={getNavLinkClass}
+      >
+        <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/20">
+          <Info size={18} />
+        </span>
+
+        <span>About</span>
       </NavLink>
 
       <div className="mt-8 rounded-2xl bg-slate-50 p-4">
