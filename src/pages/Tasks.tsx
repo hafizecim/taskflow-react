@@ -45,6 +45,10 @@ function Tasks() {
       .toLowerCase()
 
     return tasks.filter((task) => {
+      if (task.isDeleted) {
+        return false
+      }
+
       const matchesSearch =
         task.title.toLowerCase().includes(search) ||
         task.description
@@ -64,7 +68,7 @@ function Tasks() {
         matchesStatus &&
         matchesPriority
       )
-    })
+})
   }, [
     tasks,
     searchTerm,
