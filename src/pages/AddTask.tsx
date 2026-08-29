@@ -150,9 +150,10 @@ function AddTask() {
                 id="title"
                 type="text"
                 value={title}
-                onChange={(event) =>
+                onChange={(event) => {
                   setTitle(event.target.value)
-                }
+                  setErrors([])
+                }}
                 className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100"
                 placeholder="Enter task title"
               />
@@ -171,9 +172,10 @@ function AddTask() {
               <textarea
                 id="description"
                 value={description}
-                onChange={(event) =>
+                onChange={(event) => {
                   setDescription(event.target.value)
-                }
+                  setErrors([])
+                }}
                 rows={5}
                 className="w-full resize-none rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100"
                 placeholder="Describe your task..."
@@ -194,9 +196,10 @@ function AddTask() {
                 <select
                   id="category"
                   value={category}
-                  onChange={(event) =>
+                  onChange={(event) => {
                     setCategory(event.target.value)
-                  }
+                    setErrors([])
+                  }}
                   className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-700 outline-none transition focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100"
                 >
                   <option value="">
@@ -222,12 +225,10 @@ function AddTask() {
                 <select
                   id="priority"
                   value={priority}
-                  onChange={(event) =>
-                    setPriority(
-                      event.target
-                        .value as TaskPriority,
-                    )
-                  }
+                  onChange={(event) => {
+                    setPriority(event.target.value as TaskPriority)
+                    setErrors([])
+                  }}
                   className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-700 outline-none transition focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100"
                 >
                   <option value="">
@@ -292,9 +293,10 @@ function AddTask() {
                   id="dueDate"
                   type="date"
                   value={dueDate}
-                  onChange={(event) =>
+                  onChange={(event) => {
                     setDueDate(event.target.value)
-                  }
+                    setErrors([])
+                  }}
                   className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-700 outline-none transition focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100"
                 />
               </div>
