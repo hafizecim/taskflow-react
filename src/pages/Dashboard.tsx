@@ -30,7 +30,8 @@ function Dashboard() {
     (task) => task.priority === 'High',
   ).length
 
-  const today = new Date().toISOString().split('T')[0]
+  const today = new Date()
+    .toLocaleDateString('en-CA')
 
   const overdueTasks = tasks.filter(
     (task) =>
@@ -53,8 +54,8 @@ function Dashboard() {
 
   if (loading && tasks.length === 0) {
     return (
-      <div className="flex min-h-[500px] items-center justify-center bg-slate-50">
-        <div className="rounded-2xl border border-slate-200 bg-white px-8 py-7 text-center shadow-sm">
+      <div className="flex min-h-[500px] items-center justify-center bg-slate-50 p-4">
+        <div className="w-full max-w-md rounded-2xl border border-slate-200 bg-white px-6 py-7 text-center shadow-sm">
           <div className="mx-auto mb-4 h-10 w-10 animate-spin rounded-full border-4 border-indigo-100 border-t-indigo-600" />
 
           <p className="text-lg font-medium text-slate-600">
@@ -71,8 +72,8 @@ function Dashboard() {
 
   if (error && tasks.length === 0) {
     return (
-      <div className="flex min-h-[500px] items-center justify-center bg-slate-50 p-6">
-        <div className="max-w-md rounded-2xl border border-red-200 bg-red-50 p-7 text-center shadow-sm">
+      <div className="flex min-h-[500px] items-center justify-center bg-slate-50 p-4">
+        <div className="w-full max-w-md rounded-2xl border border-red-200 bg-red-50 p-6 text-center shadow-sm sm:p-7">
           <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-red-100 text-xl text-red-600">
             !
           </div>
@@ -89,7 +90,7 @@ function Dashboard() {
           <button
             type="button"
             onClick={refetch}
-            className="rounded-xl bg-indigo-600 px-5 py-2.5 font-semibold text-white shadow-sm transition hover:bg-indigo-700 hover:shadow-md"
+            className="w-full rounded-xl bg-indigo-600 px-5 py-2.5 font-semibold text-white shadow-sm transition hover:bg-indigo-700 hover:shadow-md sm:w-auto"
           >
             Try Again
           </button>
@@ -107,19 +108,19 @@ function Dashboard() {
     .slice(0, 5)
 
   return (
-    <div className="min-h-full bg-slate-50 p-6">
+    <div className="min-h-full bg-slate-50 p-4 sm:p-6">
       <div className="mx-auto max-w-7xl">
-        <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <div>
+        <div className="mb-6 flex flex-col gap-4 sm:mb-8 sm:flex-row sm:items-center sm:justify-between">
+          <div className="min-w-0">
             <p className="mb-1 text-sm font-semibold uppercase tracking-wide text-indigo-600">
               TaskFlow
             </p>
 
-            <h1 className="text-3xl font-bold tracking-tight text-slate-900">
+            <h1 className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
               Dashboard
             </h1>
 
-            <p className="mt-2 text-slate-500">
+            <p className="mt-2 text-sm text-slate-500 sm:text-base">
               Here is your task overview.
             </p>
           </div>
@@ -127,14 +128,14 @@ function Dashboard() {
           <button
             type="button"
             onClick={() => navigate('/tasks')}
-            className="rounded-xl bg-indigo-600 px-5 py-3 font-semibold text-white shadow-sm transition hover:bg-indigo-700 hover:shadow-md"
+            className="w-full rounded-xl bg-indigo-600 px-5 py-3 font-semibold text-white shadow-sm transition hover:bg-indigo-700 hover:shadow-md sm:w-auto"
           >
             View All Tasks
           </button>
         </div>
 
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+        <div className="grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4">
+          <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-md sm:p-6">
             <p className="text-sm font-medium text-emerald-500">
               Total Tasks
             </p>
@@ -144,7 +145,7 @@ function Dashboard() {
             </p>
           </div>
 
-          <div className="rounded-2xl border border-amber-200 bg-amber-50 p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+          <div className="rounded-2xl border border-amber-200 bg-amber-50 p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-md sm:p-6">
             <p className="text-sm font-medium text-amber-700">
               Todo
             </p>
@@ -154,7 +155,7 @@ function Dashboard() {
             </p>
           </div>
 
-          <div className="rounded-2xl border border-blue-200 bg-blue-50 p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+          <div className="rounded-2xl border border-blue-200 bg-blue-50 p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-md sm:p-6">
             <p className="text-sm font-medium text-blue-700">
               In Progress
             </p>
@@ -164,7 +165,7 @@ function Dashboard() {
             </p>
           </div>
 
-          <div className="rounded-2xl border border-pink-200 bg-pink-50 p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+          <div className="rounded-2xl border border-pink-200 bg-pink-50 p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-md sm:p-6">
             <p className="text-sm font-medium text-pink-700">
               Completed
             </p>
@@ -174,7 +175,7 @@ function Dashboard() {
             </p>
           </div>
 
-          <div className="rounded-2xl border border-rose-200 bg-rose-50 p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+          <div className="rounded-2xl border border-rose-200 bg-rose-50 p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-md sm:p-6">
             <p className="text-sm font-medium text-rose-700">
               Completion Rate
             </p>
@@ -184,7 +185,7 @@ function Dashboard() {
             </p>
           </div>
 
-          <div className="rounded-2xl border border-green-200 border-green-150 p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+          <div className="rounded-2xl border border-green-200 bg-green-50 p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-md sm:p-6">
             <p className="text-sm font-medium text-green-700">
               High Priority
             </p>
@@ -194,7 +195,7 @@ function Dashboard() {
             </p>
           </div>
 
-          <div className="rounded-2xl border border-orange-200 bg-orange-50 p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+          <div className="rounded-2xl border border-orange-200 bg-orange-50 p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-md sm:p-6">
             <p className="text-sm font-medium text-orange-700">
               Overdue
             </p>
@@ -204,7 +205,7 @@ function Dashboard() {
             </p>
           </div>
 
-          <div className="rounded-2xl border border-violet-200 bg-violet-50 p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+          <div className="rounded-2xl border border-violet-200 bg-violet-50 p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-md sm:p-6">
             <p className="text-sm font-medium text-violet-700">
               Due Today
             </p>
@@ -215,8 +216,8 @@ function Dashboard() {
           </div>
         </div>
 
-        <div className="mt-8 rounded-2xl border border-slate-200 bg-white shadow-sm">
-          <div className="flex flex-col gap-3 border-b border-slate-100 p-6 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-6 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm sm:mt-8">
+          <div className="flex flex-col gap-3 border-b border-slate-100 p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
             <div>
               <h2 className="text-xl font-bold text-slate-900">
                 Recent Tasks
@@ -230,7 +231,7 @@ function Dashboard() {
             <button
               type="button"
               onClick={() => navigate('/tasks')}
-              className="text-sm font-semibold text-indigo-600 hover:text-indigo-700"
+              className="self-start text-sm font-semibold text-indigo-600 hover:text-indigo-700 sm:self-auto"
             >
               View all →
             </button>
@@ -249,7 +250,7 @@ function Dashboard() {
                   key={task.id}
                   className="flex flex-col gap-4 p-5 transition hover:bg-slate-50 sm:flex-row sm:items-center sm:justify-between"
                 >
-                  <div className="min-w-0">
+                  <div className="min-w-0 flex-1">
                     <h3 className="truncate font-semibold text-slate-900">
                       {task.title}
                     </h3>
@@ -259,7 +260,7 @@ function Dashboard() {
                     </p>
                   </div>
 
-                  <div className="flex items-center gap-3">
+                  <div className="flex shrink-0 items-center gap-3">
                     <span
                       className={`rounded-full px-3 py-1 text-xs font-semibold ${
                         task.status === 'Completed'
